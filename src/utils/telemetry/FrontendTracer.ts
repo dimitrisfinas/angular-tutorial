@@ -24,14 +24,16 @@ const FrontendTracer = async () => {
       [SemanticResourceAttributes.SERVICE_NAME]: environment.OTEL_SERVICE_NAME,
     }),
   });
-  //const traceExporter = new ConsoleSpanExporter();
+  const traceExporter = new ConsoleSpanExporter();
   //const traceExporter = new OTLPTraceExporter();
-  const traceExporter = new OTLPTraceExporter({
-    url: 'https://ingest.lightstep.com',
+  /* const traceExporter = new OTLPTraceExporter({
+    url: 'https://ingest.lightstep.com:443',
     headers: {
-      'lightstep-access-token': environment.LIGHTSTEP_ACCESS_TOKEN,
+      'lightstep-access-token':
+        'dgWk8TFEi+CX+1fTzgWJdvljm9K20CjpWINXAyudQ8qXgyYCQpK3VgeH/0hdfOmcdukuMkk1/o4Mr7f0R5wyzDf8RaMXtGZY/lfzZVzm',
     },
   });
+  */
   provider.addSpanProcessor(new SimpleSpanProcessor(traceExporter));
 
   const contextManager = new ZoneContextManager();
