@@ -75,7 +75,7 @@ const FrontendTracer = async () => {
 export default FrontendTracer;
 ```
 
-- add use of tracer in your application  `src/app/app.module.ts`
+- add use of tracer in your application  `src/app/app.module.ts`. For this, put these 2 lines just after the list of imports:
 
 ```java
 import FrontendTracer from '../utils/telemetry/FrontendTracer';
