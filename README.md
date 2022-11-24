@@ -103,3 +103,10 @@ EOF
 export OTEL_EXPORTER_OTLP_ENDPOINT=<YOUR_VALUE>
 export LIGHTSTEP_ACCESS_TOKEN=<YOUR_VALUE>
 ```
+
+- Finally, build and start the application using
+```shell
+ng serve
+```
+
+- you can now test it connectiong to http://localhost:4200
