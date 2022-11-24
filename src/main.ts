@@ -1,6 +1,9 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
 import { AppModule } from './app/app.module';
+
+// OpenTelemetry tracing wrapper
+import FrontendTracer from './utils/telemetry/FrontendTracer';
+if (typeof window !== 'undefined') FrontendTracer();
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)

@@ -12,10 +12,6 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component';
 
-// OpenTelemetry tracing wrapper
-import FrontendTracer from '../utils/telemetry/FrontendTracer';
-if (typeof window !== 'undefined') FrontendTracer();
-
 @NgModule({
   imports: [
     BrowserModule,

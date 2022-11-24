@@ -6,6 +6,8 @@ This application is issued from [Angular tutorial](https://angular.io/start)
 
 ## Adding OpenTelemetry instrumentation
 
+Instrumentation code below is coming from https://github.com/open-telemetry/opentelemetry-demo/blob/main/docs/services/frontend.md#browser-instrumentation
+
 - Install the OpenTelemetry libraries
 ```shell
 npm install @opentelemetry/api @opentelemetry/core @opentelemetry/sdk-trace-web @opentelemetry/sdk-trace-base @opentelemetry/instrumentation @opentelemetry/auto-instrumentations-web @opentelemetry/resources @opentelemetry/semantic-conventions @opentelemetry/exporter-trace-otlp-http @opentelemetry/context-zone
@@ -75,12 +77,15 @@ const FrontendTracer = async () => {
 export default FrontendTracer;
 ```
 
-- add use of tracer in your application  `src/app/app.module.ts`. For this, put these 2 lines just after the list of imports:
+- add use of tracer in your application, for this, put these 2 lines just after the list of imports in `src/main.ts`:
 
 ```java
-import FrontendTracer from '../utils/telemetry/FrontendTracer';
+import FrontendTracer from './utils/telemetry/FrontendTracer';
 if (typeof window !== 'undefined') FrontendTracer();
 ```
+
+> **_NOTE:_** You can also put them in `src/app/app.module.ts` using path `../utils/telemetry/FrontendTracer` instead
+
 
 - in order to manage you trace exporter properties (endpoint, access token), we will generate an environment file before each build using this script `./src/environments/createEnvFile.sh`
 
