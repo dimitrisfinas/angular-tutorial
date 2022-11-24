@@ -1,6 +1,6 @@
 #! /bin/sh
 SCRIPTDIR=$(dirname "$0")
-cat > ./$SCRIPTDIR/environment.ts <<EOF
+cat <<EOF > ./$SCRIPTDIR/environment.ts
 export const environment = {
   production: false,
   title: 'Local Environment Heading',
@@ -8,3 +8,4 @@ export const environment = {
   OTEL_EXPORTER_OTLP_ENDPOINT: '$OTEL_EXPORTER_OTLP_ENDPOINT',
   OTEL_SERVICE_NAME: 'angular-frontend',
 };
+EOF
