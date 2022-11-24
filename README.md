@@ -109,4 +109,4 @@ export LIGHTSTEP_ACCESS_TOKEN=<YOUR_VALUE>
 ng serve
 ```
 
-- you can now test it connectiong to http://localhost:4200
+- you can now test it connecting to http://localhost:4200
