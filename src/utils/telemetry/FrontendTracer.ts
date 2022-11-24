@@ -4,10 +4,7 @@ import {
   W3CTraceContextPropagator,
 } from '@opentelemetry/core';
 import { WebTracerProvider } from '@opentelemetry/sdk-trace-web';
-import {
-  ConsoleSpanExporter,
-  SimpleSpanProcessor,
-} from '@opentelemetry/sdk-trace-base';
+import { SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base';
 import { registerInstrumentations } from '@opentelemetry/instrumentation';
 import { getWebAutoInstrumentations } from '@opentelemetry/auto-instrumentations-web';
 import { Resource } from '@opentelemetry/resources';
@@ -24,16 +21,14 @@ const FrontendTracer = async () => {
       [SemanticResourceAttributes.SERVICE_NAME]: environment.OTEL_SERVICE_NAME,
     }),
   });
-  const traceExporter = new ConsoleSpanExporter();
+  //const traceExporter = new ConsoleSpanExporter();
   //const traceExporter = new OTLPTraceExporter();
-  /* const traceExporter = new OTLPTraceExporter({
-    url: 'https://ingest.lightstep.com:443',
+  const traceExporter = new OTLPTraceExporter({
+    url: environment.OTEL_EXPORTER_OTLP_ENDPOINT,
     headers: {
-      'lightstep-access-token':
-        'dgWk8TFEi+CX+1fTzgWJdvljm9K20CjpWINXAyudQ8qXgyYCQpK3VgeH/0hdfOmcdukuMkk1/o4Mr7f0R5wyzDf8RaMXtGZY/lfzZVzm',
+      'lightstep-access-token': environment.LIGHTSTEP_ACCESS_TOKEN,
     },
   });
-  */
   provider.addSpanProcessor(new SimpleSpanProcessor(traceExporter));
 
   const contextManager = new ZoneContextManager();
