@@ -8,4 +8,3 @@ export const environment = {
   OTEL_EXPORTER_OTLP_ENDPOINT: '$OTEL_EXPORTER_OTLP_ENDPOINT',
   OTEL_SERVICE_NAME: 'angular-frontend',
 };
-EOF)
