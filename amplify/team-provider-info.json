@@ -1,0 +1,23 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplifyb57bc14aea354-staging-150742-authRole",
+      "UnauthRoleArn": "arn:aws:iam::657746868210:role/amplify-amplifyb57bc14aea354-staging-150742-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::657746868210:role/amplify-amplifyb57bc14aea354-staging-150742-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-amplifyb57bc14aea354-staging-150742-deployment",
+      "UnauthRoleName": "amplify-amplifyb57bc14aea354-staging-150742-unauthRole",
+      "StackName": "amplify-amplifyb57bc14aea354-staging-150742",
+      "StackId": "arn:aws:cloudformation:us-east-1:657746868210:stack/amplify-amplifyb57bc14aea354-staging-150742/bee927d0-6c09-11ed-a234-129cdf2be7a5",
+      "AmplifyAppId": "ds5a8xi3gqfe4"
+    },
+    "categories": {
+      "function": {
+        "angulartutorialfuncHello": {
+          "deploymentBucketName": "amplify-amplifyb57bc14aea354-staging-150742-deployment",
+          "s3Key": "amplify-builds/angulartutorialfuncHello-5474565379534f323255-build.zip"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/items/{itemid}": {
+      "name": "/items/{itemid}",
+      "lambdaFunction": "angulartutorialfuncHello",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
