@@ -1,9 +1,15 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 
+// Amplify API definition
+import { Amplify, API } from 'aws-amplify';
+import awsconfig from './aws-exports';
+
 // OpenTelemetry tracing wrapper
 import FrontendTracer from './utils/telemetry/FrontendTracer';
 if (typeof window !== 'undefined') FrontendTracer();
+
+Amplify.configure(awsconfig);
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)

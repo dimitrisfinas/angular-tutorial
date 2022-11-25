@@ -10,6 +10,28 @@ import { products } from '../products';
 export class ProductListComponent {
   products = products;
 
+
+  callAPI() {
+    const apiName = 'angulartutorialApiHello';
+    const path = '/items/1';
+    const myInit = {
+//      headers: {}, // OPTIONAL
+//      response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
+      queryStringParameters: {
+        name: 'param' // OPTIONAL
+      }
+    };
+
+    API.get(apiName, path, myInit)
+      .then((response) => {
+        // Add your code here
+        window.alert('Response from API: ' + response);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }
+
   share() {
     window.alert('The product has been shared!');
   }
