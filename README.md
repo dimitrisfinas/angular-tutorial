@@ -115,3 +115,23 @@ ng serve
 ```
 
 - you can now test it connecting to http://localhost:4200
+
+
+## Adding Backend Instrumentation
+
+- Follow instructions [here](https://docs.amplify.aws/lib/restapi/getting-started/q/platform/js/#automated-setup-create-new-rest-api) to create your API
+
+
+
+## Troubleshooting
+
+- on Backend build, getting error:
+```
+# Starting phase: build
+2022-02-14T02:47:02.527Z [INFO]: [31mInvalid feature flag configuration[39m
+2022-02-14T02:47:02.530Z [INFO]: [31mThese feature flags are defined in the "amplify/cli.json" configuration file and are unknown to the currently running Amplify CLI:[39m
+[31m  - project[39m
+```
+  - check you version of amplifi cli with `amplify --version`
+  - Then update version in your AWS Amplify console -> Build Settings -> Build Image Settings -> Live package updates -> Amplify CLI
+  - see more details [here](https://stackoverflow.com/questions/71106728/amplify-invalid-feature-flag-configuration-on-build) 
