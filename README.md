@@ -119,7 +119,9 @@ ng serve
 
 ## Adding Backend Instrumentation
 
-- Follow instructions [here](https://docs.amplify.aws/lib/restapi/getting-started/q/platform/js/#automated-setup-create-new-rest-api) to create your API
+- Create your function
+
+- Create your API that will call your function. Follow instructions [here](https://docs.amplify.aws/lib/restapi/getting-started/q/platform/js/#automated-setup-create-new-rest-api) to create your API
 
 
 
@@ -155,8 +157,40 @@ error TS7006: Parameter 'error' implicitly has an 'any' type.
 ```
   - add `"noImplicitAny": false,` in your `tsconfig.json` file
 
-- On runtime, getting error in browser console:
+- At runtime, getting error in browser console:
 `Uncaught ReferenceError: global is not defined`
+  - update `./src/index.html` to add at the beginning:
+  ```html
+  <script>
+    if (global === undefined) {
+      var global = window;
+    }
+  </script>
+  ```
+
+- At runtime, getting error in browser console when calling external API:
+```
+Access to XMLHttpRequest at 'https://your_api' from origin 'https://your_app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+```
+  - update your lambda function to return CORS header. Exampel below is for node JS
+```java
+exports.handler = async (event) => {
+    const response = {
+        statusCode: 200,
+        headers: {
+            "Access-Control-Allow-Headers" : "Content-Type",
+            "Access-Control-Allow-Origin": "https://www.example.com",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        },
+        body: JSON.stringify('Hello from Lambda!'),
+    };
+    return response;
+};
+```
+  - see details [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html)
+
+
+TO REMOVE
   - create a `./src/polyfills.ts` file with content from
     - https://stackoverflow.com/questions/54349858/angular-7-uncaught-referenceerror-global-is-not-defined-when-adding-package
     - https://docs.amplify.aws/start/getting-started/setup/q/integration/angular/#angular-6-support
