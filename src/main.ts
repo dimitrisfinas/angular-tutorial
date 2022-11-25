@@ -3,7 +3,7 @@ import { AppModule } from './app/app.module';
 
 // Amplify API definition
 import { Amplify, API } from 'aws-amplify';
-import awsconfig from './aws-exports';
+import awsmobile from './aws-exports';
 
 // OpenTelemetry tracing wrapper
 import FrontendTracer from './utils/telemetry/FrontendTracer';

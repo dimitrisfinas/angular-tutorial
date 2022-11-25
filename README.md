@@ -132,6 +132,13 @@ ng serve
 2022-02-14T02:47:02.530Z [INFO]: [31mThese feature flags are defined in the "amplify/cli.json" configuration file and are unknown to the currently running Amplify CLI:[39m
 [31m  - project[39m
 ```
-  - check you version of amplifi cli with `amplify --version`
+  - check you version of amplify cli with `amplify --version`
   - Then update version in your AWS Amplify console -> Build Settings -> Build Image Settings -> Live package updates -> Amplify CLI
-  - see more details [here](https://stackoverflow.com/questions/71106728/amplify-invalid-feature-flag-configuration-on-build) 
+  - see more details [here](https://stackoverflow.com/questions/71106728/amplify-invalid-feature-flag-configuration-on-build)
+
+- on Frontend build, getting error:
+```
+Error: src/main.ts:5:30 - error TS2307: Cannot find module 'aws-amplify' or its corresponding type declarations.
+  5 import { Amplify, API } from 'aws-amplify';
+```
+  - add `"noImplicitAny": false,` in my tsconfig.json
