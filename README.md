@@ -142,3 +142,15 @@ Error: src/main.ts:5:30 - error TS2307: Cannot find module 'aws-amplify' or its 
   5 import { Amplify, API } from 'aws-amplify';
 ```
   - install aws-amplify library with `npm install aws-amplify`
+
+- on Frontend build, getting error:
+```
+Error: src/main.ts:6:23 - error TS7016: Could not find a declaration file for module './aws-exports'.
+```
+  - if present, remove `aws-export` from your `.gitignore` file
+
+- on Frontend build, getting error:
+```
+error TS7006: Parameter 'error' implicitly has an 'any' type.
+```
+  - add `"noImplicitAny": false,` in your `tsconfig.json` file
