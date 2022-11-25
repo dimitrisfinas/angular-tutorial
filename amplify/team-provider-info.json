@@ -15,7 +15,8 @@
       "function": {
         "angulartutorialfuncHello": {
           "deploymentBucketName": "amplify-amplifyb57bc14aea354-staging-150742-deployment",
-          "s3Key": "amplify-builds/angulartutorialfuncHello-5474565379534f323255-build.zip"
+          "s3Key": "amplify-builds/angulartutorialfuncHello-5474565379534f323255-build.zip",
+          "awsLambdaExecWrapper": "/opt/otel-handler"
         }
       }
     }
