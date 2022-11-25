@@ -141,4 +141,4 @@ ng serve
 Error: src/main.ts:5:30 - error TS2307: Cannot find module 'aws-amplify' or its corresponding type declarations.
   5 import { Amplify, API } from 'aws-amplify';
 ```
-  - add `"noImplicitAny": false,` in my tsconfig.json
+  - install aws-amplify library with `npm install aws-amplify`
