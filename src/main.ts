@@ -5,11 +5,11 @@ import { AppModule } from './app/app.module';
 import { Amplify, API } from 'aws-amplify';
 import awsmobile from './aws-exports';
 
+Amplify.configure(awsmobile);
+
 // OpenTelemetry tracing wrapper
 import FrontendTracer from './utils/telemetry/FrontendTracer';
 if (typeof window !== 'undefined') FrontendTracer();
-
-Amplify.configure(awsmobile);
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)

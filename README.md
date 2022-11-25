@@ -154,3 +154,10 @@ Error: src/main.ts:6:23 - error TS7016: Could not find a declaration file for mo
 error TS7006: Parameter 'error' implicitly has an 'any' type.
 ```
   - add `"noImplicitAny": false,` in your `tsconfig.json` file
+
+- On runtime, getting error in browser console:
+`Uncaught ReferenceError: global is not defined`
+  - create a `./src/polyfills.ts` file with content from
+    - https://stackoverflow.com/questions/54349858/angular-7-uncaught-referenceerror-global-is-not-defined-when-adding-package
+    - https://docs.amplify.aws/start/getting-started/setup/q/integration/angular/#angular-6-support
+  - add it in reference in your `./tsconfig.app.json` as explained here https://angular.io/guide/browser-support#enabling-polyfills-with-cli-projects
