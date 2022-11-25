@@ -9,7 +9,7 @@ import awsconfig from './aws-exports';
 import FrontendTracer from './utils/telemetry/FrontendTracer';
 if (typeof window !== 'undefined') FrontendTracer();
 
-Amplify.configure(awsmobile);
+Amplify.configure(awsconfig);
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { API } from 'aws-amplify';
 
 import { products } from '../products';
 
