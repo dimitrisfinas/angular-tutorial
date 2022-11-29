@@ -18,6 +18,21 @@
     },
     "awsLambdaExecWrapper": {
       "Type": "String"
+    },
+    "otelServiceName": {
+      "Type": "String"
+    },
+    "otelServiceVersion": {
+      "Type": "String"
+    },
+    "opentelemetryCollectorConfigFile": {
+      "Type": "String"
+    },
+    "lightstepAccessToken": {
+      "Type": "String"
+    },
+    "nodeOptions": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -75,6 +90,21 @@
             },
             "AWS_LAMBDA_EXEC_WRAPPER": {
               "Ref": "awsLambdaExecWrapper"
+            },
+            "OTEL_SERVICE_NAME": {
+              "Ref": "otelServiceName"
+            },
+            "OTEL_SERVICE_VERSION": {
+              "Ref": "otelServiceVersion"
+            },
+            "OPENTELEMETRY_COLLECTOR_CONFIG_FILE": {
+              "Ref": "opentelemetryCollectorConfigFile"
+            },
+            "LIGHTSTEP_ACCESS_TOKEN": {
+              "Ref": "lightstepAccessToken"
+            },
+            "NODE_OPTIONS": {
+              "Ref": "nodeOptions"
             }
           }
         },

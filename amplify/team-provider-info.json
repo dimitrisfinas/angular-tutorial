@@ -15,9 +15,17 @@
       "function": {
         "angulartutorialfuncHello": {
           "deploymentBucketName": "amplify-amplifyb57bc14aea354-staging-150742-deployment",
-          "s3Key": "amplify-builds/angulartutorialfuncHello-5474565379534f323255-build.zip",
-          "awsLambdaExecWrapper": "/opt/otel-handler"
+          "s3Key": "amplify-builds/angulartutorialfuncHello-71373737625637705972-build.zip",
+          "awsLambdaExecWrapper": "/opt/otel-handler",
+          "otelServiceName": "angular-backend-function",
+          "otelServiceVersion": "1.1.0",
+          "opentelemetryCollectorConfigFile": "/var/task/opentelemetry/collector.yaml",
+          "lightstepAccessToken": "nELMx03CzkMTqJ0gR98sBfT1lMuRH+gWdGr9A2pH4SiMoZzLBGDwarCN/oNf201+B6+IkN4JE1pwMxVU2d1wjbjGPLWq4WnDqnr76YGl",
+          "nodeOptions": "--require /var/task/opentelemetry/tracing.js"
         }
+      },
+      "api": {
+        "angulartutorialApiHello": {}
       }
     }
   }

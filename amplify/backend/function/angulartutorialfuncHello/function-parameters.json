@@ -9,6 +9,26 @@
     {
       "cloudFormationParameterName": "awsLambdaExecWrapper",
       "environmentVariableName": "AWS_LAMBDA_EXEC_WRAPPER"
+    },
+    {
+      "cloudFormationParameterName": "otelServiceName",
+      "environmentVariableName": "OTEL_SERVICE_NAME"
+    },
+    {
+      "cloudFormationParameterName": "otelServiceVersion",
+      "environmentVariableName": "OTEL_SERVICE_VERSION"
+    },
+    {
+      "cloudFormationParameterName": "opentelemetryCollectorConfigFile",
+      "environmentVariableName": "OPENTELEMETRY_COLLECTOR_CONFIG_FILE"
+    },
+    {
+      "cloudFormationParameterName": "lightstepAccessToken",
+      "environmentVariableName": "LIGHTSTEP_ACCESS_TOKEN"
+    },
+    {
+      "cloudFormationParameterName": "nodeOptions",
+      "environmentVariableName": "NODE_OPTIONS"
     }
   ]
 }

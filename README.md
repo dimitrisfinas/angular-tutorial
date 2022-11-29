@@ -120,8 +120,10 @@ ng serve
 ## Adding Backend Instrumentation
 
 - Create your function
+  => Add instrumentation to your function using tips
 
 - Create your API that will call your function. Follow instructions [here](https://docs.amplify.aws/lib/restapi/getting-started/q/platform/js/#automated-setup-create-new-rest-api) to create your API
+  => Enable x-ray tracing on your API Gateway using this doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-enabling-xray.html
 
 
 
@@ -172,7 +174,7 @@ error TS7006: Parameter 'error' implicitly has an 'any' type.
 ```
 Access to XMLHttpRequest at 'https://your_api' from origin 'https://your_app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
 ```
-  - update your lambda function to return CORS header. Exampel below is for node JS
+  - update your lambda function to return CORS header. Example below is for node JS
 ```java
 exports.handler = async (event) => {
     const response = {
@@ -188,10 +190,3 @@ exports.handler = async (event) => {
 };
 ```
   - see details [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html)
-
-
-TO REMOVE
-  - create a `./src/polyfills.ts` file with content from
-    - https://stackoverflow.com/questions/54349858/angular-7-uncaught-referenceerror-global-is-not-defined-when-adding-package
-    - https://docs.amplify.aws/start/getting-started/setup/q/integration/angular/#angular-6-support
-  - add it in reference in your `./tsconfig.app.json` as explained here https://angular.io/guide/browser-support#enabling-polyfills-with-cli-projects
