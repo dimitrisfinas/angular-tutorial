@@ -6,7 +6,9 @@ const { context: otelContext, propagation } = require("@opentelemetry/api");
 // getter/setter for APIGW
 const headerGetter = {
   keys(carrier) {
-    return Object.keys(carrier);
+    //return carrier[key];
+    // hardcoded version to work for D&G context
+    const context = `${carrier["ot-tracer-traceid"]}-${carrier["ot-tracer-spanid"]}-1`;
   },
   get(carrier, key) {
     return carrier[key];
