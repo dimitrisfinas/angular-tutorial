@@ -109,6 +109,10 @@ export OTEL_EXPORTER_OTLP_ENDPOINT=<YOUR_VALUE>
 export LIGHTSTEP_ACCESS_TOKEN=<YOUR_VALUE>
 ```
 
+  - example of Lightstep endpoint for traces over http: `https://ingest.lightstep.com:443/traces/otlp/v0.9`
+  - see [here](https://docs.lightstep.com/otel/general-otlp-configuration) for more Lightstep endpoints
+
+
 - Finally, build and start the application using
 ```shell
 ng serve
