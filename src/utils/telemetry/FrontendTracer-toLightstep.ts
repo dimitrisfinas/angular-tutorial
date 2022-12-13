@@ -25,6 +25,9 @@ const FrontendTracer = async () => {
   //const traceExporter = new OTLPTraceExporter();
   const traceExporter = new OTLPTraceExporter({
     url: environment.OTEL_EXPORTER_OTLP_ENDPOINT,
+    headers: {
+      'lightstep-access-token': environment.LIGHTSTEP_ACCESS_TOKEN,
+    },
   });
   provider.addSpanProcessor(new SimpleSpanProcessor(traceExporter));
 

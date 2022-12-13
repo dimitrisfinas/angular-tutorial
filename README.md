@@ -13,7 +13,7 @@ Instrumentation code below is coming from https://github.com/open-telemetry/open
 npm install @opentelemetry/api @opentelemetry/core @opentelemetry/sdk-trace-web @opentelemetry/sdk-trace-base @opentelemetry/instrumentation @opentelemetry/auto-instrumentations-web @opentelemetry/resources @opentelemetry/semantic-conventions @opentelemetry/exporter-trace-otlp-http @opentelemetry/context-zone
 ```
 
-- create tracing wrapper file `./src/utils/telemetry/FrontendTracer.ts`
+- Create tracing wrapper file `./src/utils/telemetry/FrontendTracer.ts`
 
 ```java
 import {
@@ -41,11 +41,10 @@ const FrontendTracer = async () => {
   });
   //const traceExporter = new ConsoleSpanExporter();
   //const traceExporter = new OTLPTraceExporter();
+  // Sending directly to Lightstep, you should add token in your headers
+  //  headers: { 'lightstep-access-token': environment.LIGHTSTEP_ACCESS_TOKEN },
   const traceExporter = new OTLPTraceExporter({
     url: environment.OTEL_EXPORTER_OTLP_ENDPOINT,
-    headers: {
-      'lightstep-access-token': environment.LIGHTSTEP_ACCESS_TOKEN,
-    },
   });
   provider.addSpanProcessor(new SimpleSpanProcessor(traceExporter));
 
@@ -103,15 +102,20 @@ export const environment = {
 EOF
 ```
 
-- before each build, you will have to export the two environment variables and then, run script `./src/environments/createEnvFile.sh` to generate your `environment.ts` file
+- before each build, you will have to export the environment variables and then, run script `./src/environments/createEnvFile.sh` to generate your `environment.ts` file
 ```shell
 export OTEL_EXPORTER_OTLP_ENDPOINT=<YOUR_VALUE>
-export LIGHTSTEP_ACCESS_TOKEN=<YOUR_VALUE>
 ```
+
+  - example of Collector endpoint for traces over http: `https://otel-collector:4318/v1/traces`
+  - see [here](https://www.npmjs.com/package/@opentelemetry/exporter-trace-otlp-http) for more code examples
 
   - example of Lightstep endpoint for traces over http: `https://ingest.lightstep.com:443/traces/otlp/v0.9`
   - see [here](https://docs.lightstep.com/otel/general-otlp-configuration) for more Lightstep endpoints
-
+  - if you want to send traces directly to Lightstep , you should also export you token value
+  ```shell
+  export LIGHTSTEP_ACCESS_TOKEN=<YOUR_VALUE>
+  ```
 
 - Finally, build and start the application using
 ```shell
@@ -119,16 +123,6 @@ ng serve
 ```
 
 - you can now test it connecting to http://localhost:4200
-
-
-## Adding Backend Instrumentation
-
-- Create your function
-  => Add instrumentation to your function using tips
-
-- Create your API that will call your function. Follow instructions [here](https://docs.amplify.aws/lib/restapi/getting-started/q/platform/js/#automated-setup-create-new-rest-api) to create your API
-  => Enable x-ray tracing on your API Gateway using this doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-enabling-xray.html
-
 
 
 ## Troubleshooting
