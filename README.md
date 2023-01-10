@@ -8,12 +8,12 @@ This application is issued from [Angular tutorial](https://angular.io/start)
 
 Instrumentation code below is coming from https://github.com/open-telemetry/opentelemetry-demo/blob/main/docs/services/frontend.md#browser-instrumentation
 
-- Install the OpenTelemetry libraries
+1. Install the OpenTelemetry libraries
 ```shell
 npm install @opentelemetry/api @opentelemetry/core @opentelemetry/sdk-trace-web @opentelemetry/sdk-trace-base @opentelemetry/instrumentation @opentelemetry/auto-instrumentations-web @opentelemetry/resources @opentelemetry/semantic-conventions @opentelemetry/exporter-trace-otlp-http @opentelemetry/context-zone
 ```
 
-- Create tracing wrapper file `./src/utils/telemetry/FrontendTracer.ts`
+2. Create tracing wrapper file `./src/utils/telemetry/FrontendTracer.ts`
 
 ```java
 import {
@@ -76,7 +76,7 @@ const FrontendTracer = async () => {
 export default FrontendTracer;
 ```
 
-- add use of tracer in your application, for this, put these 2 lines just after the list of imports in `src/main.ts`:
+3. add use of tracer in your application, for this, put these 2 lines just after the list of imports in `src/main.ts`:
 
 ```java
 import FrontendTracer from './utils/telemetry/FrontendTracer';
@@ -86,7 +86,7 @@ if (typeof window !== 'undefined') FrontendTracer();
 > **_NOTE:_** You can also put them in `src/app/app.module.ts` using path `../utils/telemetry/FrontendTracer` instead
 
 
-- in order to manage you trace exporter properties (endpoint, access token), we will generate an environment file before each build using this script `./src/environments/createEnvFile.sh`
+4. in order to manage you trace exporter properties (endpoint, access token), we will generate an environment file before each build using this script `./src/environments/createEnvFile.sh`
 
 ```shell
 #! /bin/sh
@@ -109,7 +109,7 @@ export const environment = {
 EOF
 ```
 
-- before each build, you will have to export the environment variables and then, run script `./src/environments/createEnvFile.sh` to generate your `environment.ts` file
+5. before each build, you will have to export the environment variables and then, run script `./src/environments/createEnvFile.sh` to generate your `environment.ts` file
 ```shell
 export OTEL_EXPORTER_OTLP_ENDPOINT=<YOUR_VALUE>
 ```
@@ -124,12 +124,11 @@ export OTEL_EXPORTER_OTLP_ENDPOINT=<YOUR_VALUE>
     export LIGHTSTEP_ACCESS_TOKEN=<YOUR_VALUE>
     ```
 
-- Finally, build and start the application using
+6. Finally, build and start the application using
 ```shell
 ng serve
 ```
-
-- you can now test it connecting to http://localhost:4200
+    - You can now test it connecting to http://localhost:4200
 
 
 ## Troubleshooting
@@ -158,11 +157,13 @@ Error: src/main.ts:6:23 - error TS7016: Could not find a declaration file for mo
 ```
     1. if present, remove `aws-export` from your `.gitignore` file
 
+
 - on Frontend build, getting error:
 ```
 error TS7006: Parameter 'error' implicitly has an 'any' type.
 ```
     1. add `"noImplicitAny": false,` in your `tsconfig.json` file
+
 
 - At runtime, getting error in browser console:
 `Uncaught ReferenceError: global is not defined`
@@ -175,10 +176,27 @@ error TS7006: Parameter 'error' implicitly has an 'any' type.
     </script>
     ```
 
+- At runtime, getting error in browser console:
+`Access to XMLHttpRequest at 'ingest.lightstep.com:443' from origin 'http://localhost:4200' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: http, data, isolated-app, chrome-extension, chrome, https, chrome-untrusted`
+    1. you forgot to put `https://` or `http:` at the beginning of your OTEL_EXPORTER_OTLP_ENDPOINT YOUR_VALUE
+
+- At runtime, getting error in browser console:
+`Access to resource at 'https://ingest.lightstep.com/traces/otlp/v0.9' from origin 'http://localhost:4200' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: The value of the 'Access-Control-Allow-Credentials' header in the response is '' which must be 'true' when the request's credentials mode is 'include'`
+    1. you may have forgotten to put an access token value in your header
+    2. see `src/utils/telemetry/FrontendTracer-toLightstep.ts` as example
+
+
+- At runtime, getting error in browser console:
+`Access to XMLHttpRequest at 'https://ingest.lightstep.com/traces/otlp/v0.9' from origin 'http://localhost:4200' has been blocked by CORS policy: Request header field access-control-allow-origin is not allowed by Access-Control-Allow-Headers in preflight response.`
+    1. check your request header, you may have unnecessary information
+
+
+- At runtime, getting error code http 400 in browser console when calling OTLP backend:
+    1. check if you use the correct Lightstep access token
+
+
 - At runtime, getting error in browser console when calling external API:
-```
-Access to XMLHttpRequest at 'https://your_api' from origin 'https://your_app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
-```
+`Access to XMLHttpRequest at 'https://your_api' from origin 'https://your_app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.``
     1. update your lambda function to return CORS header. Example below is for node JS
 ```java
 exports.handler = async (event) => {
