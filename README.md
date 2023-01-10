@@ -134,40 +134,32 @@ ng serve
 ## Troubleshooting
 
 - on Backend build, getting error:
-```
-# Starting phase: build
+`# Starting phase: build
 2022-02-14T02:47:02.527Z [INFO]: [31mInvalid feature flag configuration[39m
 2022-02-14T02:47:02.530Z [INFO]: [31mThese feature flags are defined in the "amplify/cli.json" configuration file and are unknown to the currently running Amplify CLI:[39m
-[31m  - project[39m
-```
-    1. check you version of amplify cli with `amplify --version`
-    2. Then update version in your AWS Amplify console -> Build Settings -> Build Image Settings -> Live package updates -> Amplify CLI
-    3. see more details [here](https://stackoverflow.com/questions/71106728/amplify-invalid-feature-flag-configuration-on-build)
+[31m  - project[39m`
+    - check you version of amplify cli with `amplify --version`
+    - Then update version in your AWS Amplify console -> Build Settings -> Build Image Settings -> Live package updates -> Amplify CLI
+    - see more details [here](https://stackoverflow.com/questions/71106728/amplify-invalid-feature-flag-configuration-on-build)
 
 - on Frontend build, getting error:
-```
-Error: src/main.ts:5:30 - error TS2307: Cannot find module 'aws-amplify' or its corresponding type declarations.
-  5 import { Amplify, API } from 'aws-amplify';
-```
-    1. install aws-amplify library with `npm install aws-amplify`
+`Error: src/main.ts:5:30 - error TS2307: Cannot find module 'aws-amplify' or its corresponding type declarations.
+  5 import { Amplify, API } from 'aws-amplify';`
+    - install aws-amplify library with `npm install aws-amplify`
 
 - on Frontend build, getting error:
-```
-Error: src/main.ts:6:23 - error TS7016: Could not find a declaration file for module './aws-exports'.
-```
-    1. if present, remove `aws-export` from your `.gitignore` file
+`Error: src/main.ts:6:23 - error TS7016: Could not find a declaration file for module './aws-exports'``
+    - if present, remove `aws-export` from your `.gitignore` file
 
 
 - on Frontend build, getting error:
-```
-error TS7006: Parameter 'error' implicitly has an 'any' type.
-```
-    1. add `"noImplicitAny": false,` in your `tsconfig.json` file
+`error TS7006: Parameter 'error' implicitly has an 'any' type`
+    - add `"noImplicitAny": false,` in your `tsconfig.json` file
 
 
 - At runtime, getting error in browser console:
 `Uncaught ReferenceError: global is not defined`
-    1. update `./src/index.html` to add at the beginning:
+    - update `./src/index.html` to add at the beginning:
     ```html
     <script>
       if (global === undefined) {
@@ -178,26 +170,26 @@ error TS7006: Parameter 'error' implicitly has an 'any' type.
 
 - At runtime, getting error in browser console:
 `Access to XMLHttpRequest at 'ingest.lightstep.com:443' from origin 'http://localhost:4200' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: http, data, isolated-app, chrome-extension, chrome, https, chrome-untrusted`
-    1. you forgot to put `https://` or `http:` at the beginning of your OTEL_EXPORTER_OTLP_ENDPOINT YOUR_VALUE
+    - you forgot to put `https://` or `http:` at the beginning of your OTEL_EXPORTER_OTLP_ENDPOINT YOUR_VALUE
 
 - At runtime, getting error in browser console:
 `Access to resource at 'https://ingest.lightstep.com/traces/otlp/v0.9' from origin 'http://localhost:4200' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: The value of the 'Access-Control-Allow-Credentials' header in the response is '' which must be 'true' when the request's credentials mode is 'include'`
-    1. you may have forgotten to put an access token value in your header
-    2. see `src/utils/telemetry/FrontendTracer-toLightstep.ts` as example
+    - you may have forgotten to put an access token value in your header
+    - see `src/utils/telemetry/FrontendTracer-toLightstep.ts` as example
 
 
 - At runtime, getting error in browser console:
 `Access to XMLHttpRequest at 'https://ingest.lightstep.com/traces/otlp/v0.9' from origin 'http://localhost:4200' has been blocked by CORS policy: Request header field access-control-allow-origin is not allowed by Access-Control-Allow-Headers in preflight response.`
-    1. check your request header, you may have unnecessary information
+    - check your request header, you may have unnecessary information
 
 
 - At runtime, getting error code http 400 in browser console when calling OTLP backend:
-    1. check if you use the correct Lightstep access token
+    - check if you use the correct Lightstep access token
 
 
 - At runtime, getting error in browser console when calling external API:
 `Access to XMLHttpRequest at 'https://your_api' from origin 'https://your_app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.``
-    1. update your lambda function to return CORS header. Example below is for node JS
+    - update your lambda function to return CORS header. Example below is for node JS
 ```java
 exports.handler = async (event) => {
     const response = {
@@ -212,4 +204,4 @@ exports.handler = async (event) => {
     return response;
 };
 ```
-    2. see details [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html)
+    - see details [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html)
