@@ -90,6 +90,13 @@ if (typeof window !== 'undefined') FrontendTracer();
 
 ```shell
 #! /bin/sh
+#### GENERATOR FOR ENVIRONMENT FILE
+## Variables defined here with $ prefix can be defined using a shell EXPORT before launching the script
+## Define LIGHTSTEP_ACCESS_TOKEN variable only if you want to directly send traces to Lightstep for test purposes
+## Define OTEL_EXPORTER_OTLP_ENDPOINT to go to your OpenTelemetry collector or directly to Lightstep for test purposes
+## For Otel Collector, you can use: https://<YOU_OTEL_COLLECTOR_HOST>:4318/v1/traces
+## For Lightstep, you can use: https://ingest.lightstep.com:443/traces/otlp/v0.9
+## Recommended architecture in production is to go through Otel Collector
 SCRIPTDIR=$(dirname "$0")
 cat <<EOF > ./$SCRIPTDIR/environment.ts
 export const environment = {
@@ -113,9 +120,9 @@ export OTEL_EXPORTER_OTLP_ENDPOINT=<YOUR_VALUE>
     - example of Lightstep endpoint for traces over http: `https://ingest.lightstep.com:443/traces/otlp/v0.9`
     - see [here](https://docs.lightstep.com/otel/general-otlp-configuration) for more Lightstep endpoints
     - if you want to send traces directly to Lightstep , you should also export you token value
-  ```shell
-  export LIGHTSTEP_ACCESS_TOKEN=<YOUR_VALUE>
-  ```
+    ```shell
+    export LIGHTSTEP_ACCESS_TOKEN=<YOUR_VALUE>
+    ```
 
 - Finally, build and start the application using
 ```shell
