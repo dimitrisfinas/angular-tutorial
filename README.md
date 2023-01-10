@@ -107,12 +107,12 @@ EOF
 export OTEL_EXPORTER_OTLP_ENDPOINT=<YOUR_VALUE>
 ```
 
-  - example of Collector endpoint for traces over http: `https://otel-collector:4318/v1/traces`
-  - see [here](https://www.npmjs.com/package/@opentelemetry/exporter-trace-otlp-http) for more code examples
+    - example of Collector endpoint for traces over http: `https://otel-collector:4318/v1/traces`
+    - see [here](https://www.npmjs.com/package/@opentelemetry/exporter-trace-otlp-http) for more code examples
 
-  - example of Lightstep endpoint for traces over http: `https://ingest.lightstep.com:443/traces/otlp/v0.9`
-  - see [here](https://docs.lightstep.com/otel/general-otlp-configuration) for more Lightstep endpoints
-  - if you want to send traces directly to Lightstep , you should also export you token value
+    - example of Lightstep endpoint for traces over http: `https://ingest.lightstep.com:443/traces/otlp/v0.9`
+    - see [here](https://docs.lightstep.com/otel/general-otlp-configuration) for more Lightstep endpoints
+    - if you want to send traces directly to Lightstep , you should also export you token value
   ```shell
   export LIGHTSTEP_ACCESS_TOKEN=<YOUR_VALUE>
   ```
@@ -134,45 +134,45 @@ ng serve
 2022-02-14T02:47:02.530Z [INFO]: [31mThese feature flags are defined in the "amplify/cli.json" configuration file and are unknown to the currently running Amplify CLI:[39m
 [31m  - project[39m
 ```
-  - check you version of amplify cli with `amplify --version`
-  - Then update version in your AWS Amplify console -> Build Settings -> Build Image Settings -> Live package updates -> Amplify CLI
-  - see more details [here](https://stackoverflow.com/questions/71106728/amplify-invalid-feature-flag-configuration-on-build)
+    1. check you version of amplify cli with `amplify --version`
+    2. Then update version in your AWS Amplify console -> Build Settings -> Build Image Settings -> Live package updates -> Amplify CLI
+    3. see more details [here](https://stackoverflow.com/questions/71106728/amplify-invalid-feature-flag-configuration-on-build)
 
 - on Frontend build, getting error:
 ```
 Error: src/main.ts:5:30 - error TS2307: Cannot find module 'aws-amplify' or its corresponding type declarations.
   5 import { Amplify, API } from 'aws-amplify';
 ```
-  - install aws-amplify library with `npm install aws-amplify`
+    1. install aws-amplify library with `npm install aws-amplify`
 
 - on Frontend build, getting error:
 ```
 Error: src/main.ts:6:23 - error TS7016: Could not find a declaration file for module './aws-exports'.
 ```
-  - if present, remove `aws-export` from your `.gitignore` file
+    1. if present, remove `aws-export` from your `.gitignore` file
 
 - on Frontend build, getting error:
 ```
 error TS7006: Parameter 'error' implicitly has an 'any' type.
 ```
-  - add `"noImplicitAny": false,` in your `tsconfig.json` file
+    1. add `"noImplicitAny": false,` in your `tsconfig.json` file
 
 - At runtime, getting error in browser console:
 `Uncaught ReferenceError: global is not defined`
-  - update `./src/index.html` to add at the beginning:
-  ```html
-  <script>
-    if (global === undefined) {
-      var global = window;
-    }
-  </script>
-  ```
+    1. update `./src/index.html` to add at the beginning:
+    ```html
+    <script>
+      if (global === undefined) {
+        var global = window;
+      }
+    </script>
+    ```
 
 - At runtime, getting error in browser console when calling external API:
 ```
 Access to XMLHttpRequest at 'https://your_api' from origin 'https://your_app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
 ```
-  - update your lambda function to return CORS header. Example below is for node JS
+    1. update your lambda function to return CORS header. Example below is for node JS
 ```java
 exports.handler = async (event) => {
     const response = {
@@ -187,4 +187,4 @@ exports.handler = async (event) => {
     return response;
 };
 ```
-  - see details [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html)
+    2. see details [here](https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-cors.html)
