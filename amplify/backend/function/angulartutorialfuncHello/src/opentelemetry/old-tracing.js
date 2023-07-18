@@ -3,11 +3,21 @@ const {
 } = require("@opentelemetry/instrumentation-aws-lambda");
 const { context: otelContext, propagation } = require("@opentelemetry/api");
 
+// Default headerGetter from https://github.com/open-telemetry/opentelemetry-js-contrib/blob/main/plugins/node/opentelemetry-instrumentation-aws-lambda/src/instrumentation.ts
+const headerGetter: TextMapGetter<APIGatewayProxyEventHeaders> = {
+  keys(carrier): string[] {
+    return Object.keys(carrier);
+  },
+  get(carrier, key: string) {
+    return carrier[key];
+  },
+};
+
 // getter/setter for APIGW
-const headerGetter = {
+const apigwGetter = {
   keys(carrier) {
     //return carrier[key];
-    // hardcoded version to work for D&G context
+    // hardcoded version to work for D&G API Gateway
     const context = `${carrier["ot-tracer-traceid"]}-${carrier["ot-tracer-spanid"]}-1`;
   },
   get(carrier, key) {
@@ -37,7 +47,7 @@ global.configureLambdaInstrumentation = (config) => {
         return propagation.extract(
           otelContext.active(),
           httpHeaders,
-          headerGetter
+          apigwGetter
         );
       }
 
